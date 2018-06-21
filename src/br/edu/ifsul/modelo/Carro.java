@@ -2,14 +2,19 @@
 package br.edu.ifsul.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -71,9 +76,22 @@ public class Carro implements Serializable{
     @NotNull(message = "A marca deve ser informado")
     @JoinColumn(name = "marca", referencedColumnName = "id",  nullable = false, foreignKey = @ForeignKey(name = "fK_marca_id"))
     private Marca marca;
+    
+    @OneToMany(mappedBy = "carro", cascade = CascadeType.ALL, 
+            orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Imagem> imagens = new ArrayList<>();
 
     public Carro() {
         
+    }
+    
+    public void adicionarImagem(Imagem obj){
+        obj.setCarro(this);
+        this.imagens.add(obj);
+    }
+    
+       public void removerImagem(int index){
+        this.imagens.remove(index);
     }
     
 
@@ -147,6 +165,14 @@ public class Carro implements Serializable{
 
     public void setMarca(Marca marca) {
         this.marca = marca;
+    }
+
+    public List<Imagem> getImagens() {
+        return imagens;
+    }
+
+    public void setImagens(List<Imagem> imagens) {
+        this.imagens = imagens;
     }
     
 }

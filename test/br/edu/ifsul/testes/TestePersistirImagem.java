@@ -1,8 +1,12 @@
 
 package br.edu.ifsul.testes;
 
-import br.edu.ifsul.modelo.Autorizacao;
-import br.edu.ifsul.modelo.Marca;
+
+import br.edu.ifsul.modelo.Carro;
+import br.edu.ifsul.modelo.Imagem;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -15,12 +19,12 @@ import org.junit.Test;
  *
  * @author Ricardo/Joel
  */
-public class TestePersistirMarca {
+public class TestePersistirImagem {
     
     EntityManagerFactory emf;
     EntityManager em;
     
-    public TestePersistirMarca() {
+    public TestePersistirImagem() {
     }
     
     @Before
@@ -39,10 +43,15 @@ public class TestePersistirMarca {
     public void teste(){
         boolean exception = false;
         try {
-           em.getTransaction().begin();
-            Marca obj = new Marca();
-            obj.setNome("GM");
-            em.persist(obj);
+            Carro c = em.find(Carro.class, 2);
+            Imagem i = new Imagem();
+            i.setNome("fusca1.jpg");
+            i.setDescricao("Imagem do fusca1");
+            Path path = Paths.get("C:\\Users\\Ricardo\\Documents\\NetBeansProjects\\TA-2018-Etapa2-Model\\src\\br\\edu\\ifsul\\img\\fusca1.jpg");
+            i.setArquivo(Files.readAllBytes(path));
+            c.adicionarImagem(i);         
+            em.getTransaction().begin();
+            em.persist(c);
             em.getTransaction().commit();
         } catch(Exception e){
             exception = true;
