@@ -35,7 +35,7 @@ public class Usador implements Serializable{
     
     @NotNull(message = "O name não pode ser nulo")
     @NotBlank(message = "O name não pode ser branco")
-    @Length(max = 40, message = "Oname não pode ter mais que {max} caracteres")
+    @Length(max = 40, message = "O name não pode ter mais que {max} caracteres")
     @Column(name = "name", length = 40, nullable = false)
     private String name;
     
