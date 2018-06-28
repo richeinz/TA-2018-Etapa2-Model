@@ -66,19 +66,13 @@ public class Carro implements Serializable{
     @Column(name = "preco", nullable = false, columnDefinition = "numeric(12,2)")
     private Double preco;
     
-    @NotBlank(message = "A imagem não pode ser em branco")
-    @NotNull(message = "A imagem não pode ser nula")
-    @Length(max = 40, message = "A imagem não pode ter mais de {max} caracteres")    
-    @Column(name = "imagem", length = 40, nullable = false)
-    private String img;
-    
     @ManyToOne
     @NotNull(message = "A marca deve ser informado")
     @JoinColumn(name = "marca", referencedColumnName = "id",  nullable = false, foreignKey = @ForeignKey(name = "fK_marca_id"))
     private Marca marca;
     
     @OneToMany(mappedBy = "carro", cascade = CascadeType.ALL, 
-            orphanRemoval = true, fetch = FetchType.LAZY)
+            orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Imagem> imagens = new ArrayList<>();
 
     public Carro() {
@@ -149,14 +143,6 @@ public class Carro implements Serializable{
 
     public void setPreco(Double preco) {
         this.preco = preco;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
     }
 
     public Marca getMarca() {

@@ -43,10 +43,8 @@ public class TestePersistirImagem {
     public void teste(){
         boolean exception = false;
         try {
-            Carro c = em.find(Carro.class, 2);
+            Carro c = em.find(Carro.class, 9);
             Imagem i = new Imagem();
-            i.setNome("fusca1.jpg");
-            i.setDescricao("Imagem do fusca1");
             Path path = Paths.get("C:\\Users\\Ricardo\\Documents\\NetBeansProjects\\TA-2018-Etapa2-Model\\src\\br\\edu\\ifsul\\img\\fusca1.jpg");
             i.setArquivo(Files.readAllBytes(path));
             c.adicionarImagem(i);         

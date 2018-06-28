@@ -41,14 +41,13 @@ public class TestePersistirCarro {
         try {
            em.getTransaction().begin();
             Carro obj = new Carro();
-            obj.setAno("1969");
-            obj.setCor("Azul");
-            obj.setModelo("Fusca");
+            obj.setAno("1975");
+            obj.setCor("Preto");
+            obj.setModelo("Civic");
             obj.setPlaca("IBG0458");
             obj.setPotencia(1.3);
             obj.setPreco(12000.00);
             obj.setMarca(em.find(Marca.class, 1));
-            obj.setImg("img1.jpg");
             
             em.persist(obj);
             em.getTransaction().commit();

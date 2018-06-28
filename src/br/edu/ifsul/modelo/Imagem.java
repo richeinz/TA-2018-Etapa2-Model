@@ -29,16 +29,6 @@ public class Imagem implements Serializable{
     @GeneratedValue(generator = "seq_imagem", strategy = GenerationType.SEQUENCE)
     private Integer id;
     
-    @NotNull(message = "O nome deve ser informado")
-    @NotBlank(message = "O nome não pode ser em branco")
-    @Column(name = "nome", nullable = false, length = 50)
-    private String nome;
-    
-    @NotNull(message = "A descrição deve ser informada")
-    @NotBlank(message = "A descrição não pode ser em branco")
-    @Column(name = "descricao", nullable = false, length = 50)    
-    private String descricao;
-    
     @NotNull(message = "O arquivo deve ser informado")
     @Column(name = "arquivo", nullable = false)
     @Lob
@@ -59,22 +49,6 @@ public class Imagem implements Serializable{
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
     public byte[] getArquivo() {
